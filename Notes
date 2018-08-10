@@ -1,0 +1,73 @@
+
+Installed:
+-node
+-npm install -g npm-check-updates    ** ncu -u to run 
+-react
+-express
+-MongoDB
+-Mongoose
+-Passport & passport-google-oauth20 strategy  (you will need a seperate strategy installed for FaceBook or MS etc)
+-nodemon
+-git to Heroku
+
+
+******************************************************************************************************************************************************
+
+Git = akar.me  DD*********
+
+Heroku = akar.me P*******!
+
+https://safe-brook-41713.herokuapp.com/  (link to app)
+
+https://git.heroku.com/safe-brook-41713.git  (deployment target)
+
+
+To force git to push to heroku
+git push -f heroku master
+
+
+To redeploy app:
+git status  (to show you all the files that have changed and been saved)
+git add (to add the files that were changed)
+git commit -m "Insert your commit message"
+git push heroku master  (to push the files and rebuild the app)
+heroku logs (to make sure nothing went wrong)
+heroku open (to launch in browser)
+
+So git add --> commit --> push
+
+******************************************************************************************************************************************************
+Passport for OAuth (authentication middleware) http://http://www.passportjs.org/
+
+two libraries/heleprs are required
+
+1. Passport.js - generic authentication helper
+2. Passport Strategy - helpers for Authenticating with one very specific method
+e.g. email/password, Google, FaceBook. etc. You have to setup a different
+strategy for every kind of authentication
+
+*********************************************************************************************************************************************************
+Nodemon
+Install nodemon to restart node everytime any changes are made to the application - see package.json for additions made to the start section .. added 
+"dev": "nodemon index.js"  - basically you start up the server is dev mode which is starting up nodemon 
+"scripts": {
+    "start": "node index.js", 
+    "dev": "nodemon index.js"  <-- Dev mode - this will restart the app anytime you make a change
+  },
+
+  So in prod you just use  'node index.js'
+  When coding in dev you use 'npm run dev'
+
+*********************************************************************************************************************************************************
+mlab
+user = iakar
+email = ibrahim@akar.me
+pass = T********
+MongoDB version = 3.6.6 (MMAPv1)
+mongo ds115472.mlab.com:15472/emaily-qa -u <dbuser> -p <dbpassword>    (Demo & P@ssw0rd)
+
+
+let contentHeight = 40
+let hasHeader = true
+let rowHeight = contentHeight + (hasHeader ? 50 : 20)
+// rowHeight is equal to 90

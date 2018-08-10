@@ -1,14 +1,15 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const keys = require("./config/keys.js");
-require('./models/user.js');
+require('./models/User.js');
 require('./services/passport.js');   // no const used because the passport.js file is not sending anything back
 
 // mongoose.connect(keys.mongoURI, options); 
   //{ useNewUrlParser: true };
 
  
-mongoose.connect(keys.mongoURI); 
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true }); 
+mongoose.Promise = global.Promise;  // to get rid of the mongoose promise errors
 
 const app = express();
 

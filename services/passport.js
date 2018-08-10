@@ -1,32 +1,31 @@
 // for use with Google oauth20
 
+//passport auth
 const passport = require('passport');
+//Google Passport Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
-const keys = require("../config/keys.js"); // if the file is a js file the file extension is not required so ./config/keys will suffice
-
-const User = mongoose.model('users');  //  the User Object is our model class to give us access to the underlying collection in MongoDb.
-
+//require mongoose
+const mongoose = require('mongoose')
+//require our mongoose userSchema
+const User = mongoose.model('users');
+//google keys
+const keys = require('../config/keys');
+// Google Stategy
 passport.use(
-    new GoogleStrategy( //GoogleStrategy has code that says I am known as 'google' internal identifier - see below at passport.authenticate line where it is called
-      {
-        clientID: keys.googleClientID, // App token ID for this site  kept in keys.js file
-        clientSecret: keys.googleClientSecret, // password for the token also kept in keys.js file
-        callbackURL: '/auth/google/callback' // once the user is granted permission by Google they get routed back to this URL
-      },
-      (accessToken, refreshToken, profile, done) => {
-        new User( { goodleId: profile.id }).save();   // create a new user who has a googleID of this profile - creates a new instance of a user - 
-
-      }
-    )
-  );
-  
-  
-  /*
-  (accessToken, refreshToken, profile, done) => {
-        console.log("access token", accessToken);
-        console.log("refresh token", refreshToken);
-        console.log("profile", profile);
-      }
-    )
-    */
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID, // keys
+      clientSecret: keys.googleClientSecret, //secret key
+      callbackURL: '/auth/google/callback' //callback URL
+    },
+    //this gets executed after the callback. Save access token to DB, it is our key to each user.
+    (accessToken, refreshToken, profile, done) => {
+      new User({ 
+        googleId: profile.id
+      }).save();
+      console.log('access token', accessToken);
+      console.log('refresh token', refreshToken);
+      console.log('Display Name', profile);
+    }
+  )
+);
